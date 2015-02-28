@@ -8,16 +8,12 @@ import au.com.bytecode.opencsv.CSVWriter;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
-// ********************************************************************************************************/* This application will search twitter for a specified term and output the results to both screen and .csv file
-* Enter the twitter search terms in the second box.
-* When prompted to save file, do not add file extension, only file name
-* Get Twitter Stream will open the twitter stream filtered against your search terms.
-* Per the twitter4j api, only one out of every ten search results are returned. So if all of twitter is seeing 100 tweets per second with your term, you will have 10 returned in that time
-* Writes to .csv file upon close
-*
+// **********************************************************************************************\\
+/*
+ *
  * Jason Dixon 1/11/2015
  */
-//****************************************************************************************************** \\
+//***********************************************************************************************\\
 
 public class MyTwitterScraper
 {
@@ -39,11 +35,12 @@ public class MyTwitterScraper
     JScrollPane jsp = new JScrollPane(jta, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
     List<String[]> data = new ArrayList<String[]>();//ArrayList for twitter stream data
     int total = 0;
+    JFrame licensePopup = new JFrame();
 
     public static void main(String[] args)
     {
-        MyTwitterScraper t = new MyTwitterScraper();//main constructor
-        t.run();
+   	 MyTwitterScraper t = new MyTwitterScraper();//main constructor
+   	 t.run();
     }
     public MyTwitterScraper()
     {
@@ -51,316 +48,316 @@ public class MyTwitterScraper
     }
     public void run()
     {
-        //initial configs
-        
-        //JFileChooser config
-        fileChooser.setDialogTitle("Select File Name and Save Location");
-        
-        //output rerouting config
-        standardOut = System.out;//re-assigns standard output stream and error to text area
-        System.setOut(printStream);//re-assigns standard output stream to printStream var
-        System.setErr(printStream);//re-assigns error stream to printStream var
-        
-        //swing gui config
-        jsp.setBounds(0, 0, 1000, 750);//jscrollpane dims
-        jta.setOpaque(true);
-        jta.setBackground(Color.black);
-        jta.setForeground(Color.green);
-        searchTerms.setOpaque(true);
-        searchTerms.setBackground(Color.black);
-        searchTerms.setForeground(Color.green);
-        totalCount.setBackground(Color.black);
-        totalCount.setForeground(Color.green);
-        topPanel.setBackground(Color.DARK_GRAY);
-        centerPanel.setBackground(Color.DARK_GRAY);
-        bottomPanel.setBackground(Color.DARK_GRAY);
-        FlowLayoutJFrame gui = new FlowLayoutJFrame();//gui layout
-        gui.setSize(1336,768);
-        gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//gui default buttons
-        gui.getContentPane().setBackground(Color.darkGray);
-                
-       //windows labels:
-        JLabel totalTweets = new JLabel("   Total Tweets: ");
-        totalTweets.setForeground(Color.white);
-        JLabel info = new JLabel(" Enter Search Terms: ");
-        JLabel fileNamePrompt = new JLabel(" Session File Name: ");
-        info.setForeground(Color.white);
-        fileNamePrompt.setForeground(Color.white);
-        
-        //Action Buttons
-        JButton endButton = new JButton("Save & Close");
-        EndingListener endingEar = new EndingListener();
-        endButton.addActionListener(endingEar);
-        JButton searchButton = new JButton("Capture Twitter Stream");
-        SearchListener searchEar = new SearchListener();//searchListener constructor
-        searchButton.addActionListener(searchEar);
-        JButton configure = new JButton("OAuth Config");
-        ConfigurationListener configurationEar = new ConfigurationListener();
-        configure.addActionListener(configurationEar);
-        
-        //spacer
-        JLabel spacer = new JLabel("       ");//spacer
-        
-        //gui initialization
-        topPanel.add(info);
-        topPanel.add(searchTerms);
-        topPanel.add(spacer);
-        topPanel.add(searchButton);
-        topPanel.add(endButton);
-        topPanel.add(totalTweets);
-        topPanel.add(totalCount);
-        topPanel.add(spacer);
-        topPanel.add(configure);
-        centerPanel.add(jsp);
-        gui.add(topPanel);
-        gui.add(centerPanel);
-        
-        gui.setVisible(true);
+   	 //initial configs
+   	 
+     //License Splash Page
+     JOptionPane.showMessageDialog(licensePopup, "MyTwitterScraper is free software: you can redistribute it and/or modify\n it under the terms of the GNU General Public License as published by\n the Free Software Foundation, either version 3 of the License, or\n any later version.\n\nThis program is distributed in the hope that it will be useful,\nbut without any warranty; without even the implied warranty of\nmerchantability or fitness for a particular purpose. See the\nGNU General Public License for more details at: \nhttp://www.gnu.org/licenses\n\n.");
+   	 //JFileChooser config
+   	 fileChooser.setDialogTitle("Select File Name and Save Location");
+   	 
+   	 //output rerouting config
+   	 standardOut = System.out;//re-assigns standard output stream and error to text area
+   	 System.setOut(printStream);//re-assigns standard output stream to printStream var
+   	 System.setErr(printStream);//re-assigns error stream to printStream var
+   	 
+   	 //swing gui config
+   	 jsp.setBounds(0, 0, 1000, 750);//jscrollpane dims
+   	 jta.setOpaque(true);
+   	 jta.setBackground(Color.black);
+   	 jta.setForeground(Color.green);
+   	 searchTerms.setOpaque(true);
+   	 searchTerms.setBackground(Color.black);
+   	 searchTerms.setForeground(Color.green);
+   	 totalCount.setBackground(Color.black);
+   	 totalCount.setForeground(Color.green);
+   	 topPanel.setBackground(Color.DARK_GRAY);
+   	 centerPanel.setBackground(Color.DARK_GRAY);
+   	 bottomPanel.setBackground(Color.DARK_GRAY);
+   	 FlowLayoutJFrame gui = new FlowLayoutJFrame();//gui layout
+   	 gui.setSize(1336,768);
+   	 gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//gui default buttons
+   	 gui.getContentPane().setBackground(Color.darkGray);
+   			 
+   	//windows labels:
+   	 JLabel totalTweets = new JLabel("   Total Tweets: ");
+   	 totalTweets.setForeground(Color.white);
+   	 JLabel info = new JLabel(" Enter Search Terms: ");
+   	 JLabel fileNamePrompt = new JLabel(" Session File Name: ");
+   	 info.setForeground(Color.white);
+   	 fileNamePrompt.setForeground(Color.white);
+   	 
+   	 //Action Buttons
+   	 JButton endButton = new JButton("Save & Close");
+   	 EndingListener endingEar = new EndingListener();
+   	 endButton.addActionListener(endingEar);
+   	 JButton searchButton = new JButton("Capture Twitter Stream");
+   	 SearchListener searchEar = new SearchListener();//searchListener constructor
+   	 searchButton.addActionListener(searchEar);
+   	 JButton configure = new JButton("OAuth Config");
+   	 ConfigurationListener configurationEar = new ConfigurationListener();
+   	 configure.addActionListener(configurationEar);
+   	 
+   	 //spacer
+   	 JLabel spacer = new JLabel("   	");//spacer
+   	 
+   	 //gui initialization
+   	 topPanel.add(info);
+   	 topPanel.add(searchTerms);
+   	 topPanel.add(spacer);
+   	 topPanel.add(searchButton);
+   	 topPanel.add(endButton);
+   	 topPanel.add(totalTweets);
+   	 topPanel.add(totalCount);
+   	 topPanel.add(spacer);
+   	 topPanel.add(configure);
+   	 centerPanel.add(jsp);
+   	 gui.add(topPanel);
+   	 gui.add(centerPanel);
+   	 
+   	 gui.setVisible(true);
     }
     public class SearchListener implements ActionListener
     {
-        public void actionPerformed(ActionEvent e)
-        {
-            try
-            {
-                BufferedReader ckReader = new BufferedReader(new FileReader(consumerKey));
-                OAuthConsumerKey = ckReader.readLine();
-                //OAuthConsumerKey.trim();
-                ckReader.close();
-                System.out.println("OAuthConsumerKey:   " + OAuthConsumerKey); //trace statement
-            }
-            catch(Exception ckReadErr)
-            {
-                System.out.println("Error reading consumer key from file...");
-            }
-            try
-            {
-                BufferedReader csReader = new BufferedReader(new FileReader(consumerSecret));
-                OAuthConsumerSecret = csReader.readLine();
-                //OAuthConsumerSecret.trim();
-                csReader.close();
-                System.out.println("OAuthConsumerSecret:   " + OAuthConsumerSecret); //trace statement
-            }
-            catch(Exception csReadErr)
-            {
-                System.out.println("Error reading consumer secret from file...");
-            }
-            try
-            {
-                BufferedReader atReader = new BufferedReader(new FileReader(accessToken));
-                OAuthAccessToken = atReader.readLine();
-                //OAuthAccessToken.trim();
-                atReader.close();
-                System.out.println("OAuthAccessToken:   " + OAuthAccessToken); //trace statement
-            }
-            catch(Exception atReadErr)
-            {
-                System.out.println("Error reading access token from file...");
-            }
-            try
-            {
-                BufferedReader atsReader = new BufferedReader(new FileReader(accessTokenSecret));
-                OAuthAccessTokenSecret = atsReader.readLine();
-                //OAuthAccessTokenSecret.trim();
-                atsReader.close();
-                System.out.println("OAuthAccessTokenSecret:   " + OAuthAccessTokenSecret); //trace statement
-            }
-            catch(Exception atsReadErr)
-            {
-                System.out.println("Error reading access token secret from file...");
-            }
-            //Twitter4J code block:
-            ConfigurationBuilder c = new ConfigurationBuilder();
-            c.setDebugEnabled(true);
-            c.setOAuthConsumerKey(OAuthConsumerKey);
-          c.setOAuthConsumerSecret(OAuthConsumerSecret);
-          c.setOAuthAccessToken(OAuthAccessToken);
-          c.setOAuthAccessTokenSecret(OAuthAccessTokenSecret);
-            TwitterStream twitStream = new TwitterStreamFactory(c.build()).getInstance();
-            StatusListener statusEar = new StatusListener()
-            {
-                @Override
-                public void
-                onException(Exception arg0)
-                {
-                    //nothing here
-                }
-                @Override
-                public void onDeletionNotice(StatusDeletionNotice arg0)
-                {
-                    //nothing here
-                }
-                @Override
-                public void onScrubGeo(long arg0, long arg1)
-                {
-                    //nothing here
-                }
-                @Override
-                public void onStatus(Status status)
-                {
-                    User user = status.getUser();//gets username
-                    username = status.getUser().getScreenName();
-                    profileLocation = user.getLocation();//location data
-                    content = status.getText();//tweet content
-                    System.out.println("By: " + username);//prints username to console/jtextarea
-                    System.out.println("From: " + profileLocation);
-                    System.out.println("Tweet: " + content + "\n");
-                    String[] rowData = {username, profileLocation, content};
-                    data.add(rowData);
-                    total += 1;//counts total number of captured treats
-                    if(total%100==0)//on multiples of 100 -- or on every 100 tweets...
-                    {    
-                        jta.setText("");//resets text to blank screen
-                    }
-                    totalCount.setText(String.valueOf(total));
-                }
-                @Override
-                public void onTrackLimitationNotice(int arg0)
-                {
-                    //nothing here
-                }
-                @Override
-                public void onStallWarning(StallWarning warning)
-                {
-                    //nothing here
-                }
-            };
-            FilterQuery f = new FilterQuery();
-            String x = searchTerms.getText();
-            String keywords[] = {x};
-            f.track(keywords);
-            twitStream.addListener(statusEar);
-            twitStream.filter(f);
-        }
+   	 public void actionPerformed(ActionEvent e)
+   	 {
+   		 try
+   		 {
+   			 BufferedReader ckReader = new BufferedReader(new FileReader(consumerKey));
+   			 OAuthConsumerKey = ckReader.readLine();
+   			 ckReader.close();
+   			 System.out.println("OAuthConsumerKey:   " + OAuthConsumerKey); //trace statement
+   		 }
+   		 catch(Exception ckReadErr)
+   		 {
+   			 System.out.println("Error reading consumer key from file...");
+   		 }
+   		 try
+   		 {
+   			 BufferedReader csReader = new BufferedReader(new FileReader(consumerSecret));
+   			 OAuthConsumerSecret = csReader.readLine();
+   			 csReader.close();
+   			 System.out.println("OAuthConsumerSecret:   " + OAuthConsumerSecret); //trace statement
+   		 }
+   		 catch(Exception csReadErr)
+   		 {
+   			 System.out.println("Error reading consumer secret from file...");
+   		 }
+   		 try
+   		 {
+   			 BufferedReader atReader = new BufferedReader(new FileReader(accessToken));
+   			 OAuthAccessToken = atReader.readLine();
+   			 atReader.close();
+   			 System.out.println("OAuthAccessToken:   " + OAuthAccessToken); //trace statement
+   		 }
+   		 catch(Exception atReadErr)
+   		 {
+   			 System.out.println("Error reading access token from file...");
+   		 }
+   		 try
+   		 {
+   			 BufferedReader atsReader = new BufferedReader(new FileReader(accessTokenSecret));
+   			 OAuthAccessTokenSecret = atsReader.readLine();
+   			 atsReader.close();
+   			 System.out.println("OAuthAccessTokenSecret:   " + OAuthAccessTokenSecret); //trace statement
+   		 }
+   		 catch(Exception atsReadErr)
+   		 {
+   			 System.out.println("Error reading access token secret from file...");
+   		 }
+   		 //Twitter4J code block:
+   		 ConfigurationBuilder c = new ConfigurationBuilder();
+   		 c.setDebugEnabled(true);
+   		 c.setOAuthConsumerKey(OAuthConsumerKey);
+      	 c.setOAuthConsumerSecret(OAuthConsumerSecret);
+      	 c.setOAuthAccessToken(OAuthAccessToken);
+      	 c.setOAuthAccessTokenSecret(OAuthAccessTokenSecret);
+   		 TwitterStream twitStream = new TwitterStreamFactory(c.build()).getInstance();
+   		 StatusListener statusEar = new StatusListener()
+   		 {
+   			 @Override
+   			 public void
+   			 onException(Exception arg0)
+   			 {
+   				 //nothing here
+   			 }
+   			 @Override
+   			 public void onDeletionNotice(StatusDeletionNotice arg0)
+   			 {
+   				 //nothing here
+   			 }
+   			 @Override
+   			 public void onScrubGeo(long arg0, long arg1)
+   			 {
+   				 //nothing here
+   			 }
+   			 @Override
+   			 public void onStatus(Status status)
+   			 {
+   				 User user = status.getUser();//gets username
+   				 username = status.getUser().getScreenName();
+   				 profileLocation = user.getLocation();//location data
+   				 content = status.getText();//tweet content
+   				 System.out.println("By: " + username);//prints username to console/jtextarea
+   				 System.out.println("From: " + profileLocation);
+   				 System.out.println("Tweet: " + content + "\n");
+   				 String[] rowData = {username, profileLocation, content};
+   				 data.add(rowData);
+   				 total += 1;//counts total number of captured treats
+   				 if(total%100==0)//on multiples of 100 -- or on every 100 tweets...
+   				 {    
+   					 jta.setText("");//resets text to blank screen
+   				 }
+   				 totalCount.setText(String.valueOf(total));
+   			 }
+   			 @Override
+   			 public void onTrackLimitationNotice(int arg0)
+   			 {
+   				 //nothing here
+   			 }
+   			 @Override
+   			 public void onStallWarning(StallWarning warning)
+   			 {
+   				 //nothing here
+   			 }
+   		 };
+   		 FilterQuery f = new FilterQuery();
+   		 String x = searchTerms.getText();
+   		 String keywords[] = {x};
+   		 f.track(keywords);
+   		 twitStream.addListener(statusEar);
+   		 twitStream.filter(f);
+   	 }
     }
     public class CustomOutputStream extends OutputStream //output field in swing gui
     {
-        private JTextArea textArea;
-        public CustomOutputStream(JTextArea textArea)
-        {
-            this.textArea = textArea;
-        }
-        @Override
-        public void write(int b) throws IOException
-        {
-            textArea.append(String.valueOf((char)b));//redirects data output -- system out -- to the text area
-            textArea.setCaretPosition(textArea.getDocument().getLength());//scrolls the test area to the end of the data
-        }
+   	 private JTextArea textArea;
+   	 public CustomOutputStream(JTextArea textArea)
+   	 {
+   		 this.textArea = textArea;
+   	 }
+   	 @Override
+   	 public void write(int b) throws IOException
+   	 {
+   		 textArea.append(String.valueOf((char)b));//redirects data output -- system out -- to the text area
+   		 textArea.setCaretPosition(textArea.getDocument().getLength());//scrolls the test area to the end of the data
+   	 }
     }
     public class CreateCSVFile
     {
-        private CreateCSVFile(List<String[]> list, String filename)
-        {
-            try
-            {
-                CSVWriter writer = new CSVWriter(new FileWriter(filename));
-                writer.writeAll(list);
-                writer.close();
-                System.out.println("CSVWriter is closed...");//trace
-            }
-            catch(Exception err)
-            {
-                System.out.println("Error loading CSVWriter");
-                err.printStackTrace(System.err);
-            }
-        }
+   	 private CreateCSVFile(List<String[]> list, String filename)
+   	 {
+   		 try
+   		 {
+   			 CSVWriter writer = new CSVWriter(new FileWriter(filename));
+   			 writer.writeAll(list);
+   			 writer.close();
+   			 System.out.println("CSVWriter is closed...");//trace
+   		 }
+   		 catch(Exception err)
+   		 {
+   			 System.out.println("Error loading CSVWriter");
+   			 err.printStackTrace(System.err);
+   		 }
+   	 }
     }
     public class ConfigurationListener implements ActionListener
     {
-        public void actionPerformed(ActionEvent d)
-        {
-            //   set/reset strings to null
-            OAuthConsumerKey = "";
-            OAuthConsumerSecret = "";
-            OAuthAccessToken = "";
-            OAuthAccessTokenSecret = "";
-            //get from user
-            OAuthConsumerKey = JOptionPane.showInputDialog("Copy & Paste your OAuthConsumerKey Here:");
-            try
-            {
-                BufferedWriter ckWriter = new BufferedWriter(new FileWriter("consumerKey"));
-                ckWriter.write(OAuthConsumerKey);
-                ckWriter.close();
-            }
-            catch(Exception ckErr)
-            {
-                System.out.println("Error writing consumer key to file. This data was most likely not saved...");
-            }
-            //get from user
-            OAuthConsumerSecret = JOptionPane.showInputDialog("Copy & Paste your OAuthConsumerSecret Here:");
-            try
-            {
-                BufferedWriter csWriter = new BufferedWriter(new FileWriter("consumerSecret"));
-                csWriter.write(OAuthConsumerSecret);
-                csWriter.close();
-            }
-            catch(Exception csErr)
-            {
-                System.out.println("Error writing consumer secret to file. This data was most likely not saved...");
-            }
-            //get from user
-            OAuthAccessToken = JOptionPane.showInputDialog("Copy & Paste your OAuthAccessToken Here:");
-            try
-            {
-                BufferedWriter asWriter = new BufferedWriter(new FileWriter("accessToken"));
-                asWriter.write(OAuthAccessToken);
-                asWriter.close();
-            }
-            catch(Exception asErr)
-            {
-                System.out.println("Error writing access token to file. This data was most likely not saved...");
-            }
-            //get from user
-            OAuthAccessTokenSecret = JOptionPane.showInputDialog("Copy your OAuthAccessTokenSecret Here:");
-            try
-            {
-                BufferedWriter tsWriter = new BufferedWriter(new FileWriter("accessTokenSecret"));
-                tsWriter.write(OAuthAccessTokenSecret);
-                tsWriter.close();
-            }
-            catch(Exception tsErr)
-            {
-                System.out.println("Error writing access token secret to file. This data was most likely not saved...");
-            }
-            JOptionPane.showMessageDialog(null,  "Your OAuth data has been saved.");
-        }
+   	 public void actionPerformed(ActionEvent d)
+   	 {
+   		 //   set/reset strings to null
+   		 OAuthConsumerKey = "";
+   		 OAuthConsumerSecret = "";
+   		 OAuthAccessToken = "";
+   		 OAuthAccessTokenSecret = "";
+   		 //get from user
+   		 //FileWriter will overwrite instead of append, allowing multiple tries for correct entry
+   		 OAuthConsumerKey = JOptionPane.showInputDialog("Copy & Paste your OAuthConsumerKey Here:");
+   		 try
+   		 {
+   			 BufferedWriter ckWriter = new BufferedWriter(new FileWriter("consumerKey"));
+   			 ckWriter.write(OAuthConsumerKey);
+   			 ckWriter.close();
+   		 }
+   		 catch(Exception ckErr)
+   		 {
+   			 System.out.println("Error writing consumer key to file. This data was most likely not saved...");
+   		 }
+   		 //get from user
+   		 OAuthConsumerSecret = JOptionPane.showInputDialog("Copy & Paste your OAuthConsumerSecret Here:");
+   		 try
+   		 {
+   			 BufferedWriter csWriter = new BufferedWriter(new FileWriter("consumerSecret"));
+   			 csWriter.write(OAuthConsumerSecret);
+   			 csWriter.close();
+   		 }
+   		 catch(Exception csErr)
+   		 {
+   			 System.out.println("Error writing consumer secret to file. This data was most likely not saved...");
+   		 }
+   		 //get from user
+   		 OAuthAccessToken = JOptionPane.showInputDialog("Copy & Paste your OAuthAccessToken Here:");
+   		 try
+   		 {
+   			 BufferedWriter asWriter = new BufferedWriter(new FileWriter("accessToken"));
+   			 asWriter.write(OAuthAccessToken);
+   			 asWriter.close();
+   		 }
+   		 catch(Exception asErr)
+   		 {
+   			 System.out.println("Error writing access token to file. This data was most likely not saved...");
+   		 }
+   		 //get from user
+   		 OAuthAccessTokenSecret = JOptionPane.showInputDialog("Copy your OAuthAccessTokenSecret Here:");
+   		 try
+   		 {
+   			 BufferedWriter tsWriter = new BufferedWriter(new FileWriter("accessTokenSecret"));
+   			 tsWriter.write(OAuthAccessTokenSecret);
+   			 tsWriter.close();
+   		 }
+   		 catch(Exception tsErr)
+   		 {
+   			 System.out.println("Error writing access token secret to file. This data was most likely not saved...");
+   		 }
+   		 JOptionPane.showMessageDialog(null,  "Your OAuth data has been saved.");
+   	 }
     }
     public class EndingListener implements ActionListener
     {
-        public void actionPerformed(ActionEvent e)
-        {
-            int fc = fileChooser.showOpenDialog(null);//opens file dialog box to select file save location
-            if(fc == JFileChooser.APPROVE_OPTION)
-            {
-                           File file = fileChooser.getSelectedFile(); //gets pathway for file
-                           filePath = file.getAbsolutePath() + ".csv";//returns selected file pathway as string to be used in creating csv
-            }
-            try
-            {
-                CreateCSVFile file = new CreateCSVFile(data, filePath);
-            }
-            catch(Exception exc)
-            {
-                System.out.println("Error creating CSVFile...");
-            }
-            JOptionPane.showMessageDialog(null,  "CSV File Created. Program Will Now End.");
-            System.exit(0);
-        }
+   	 @SuppressWarnings("unused")
+	public void actionPerformed(ActionEvent e)
+   	 {
+   		 int fc = fileChooser.showOpenDialog(null);//opens file dialog box to select file save location
+   		 if(fc == JFileChooser.APPROVE_OPTION)
+   		 {
+   			   		 File file = fileChooser.getSelectedFile(); //gets pathway for file
+   			   		 filePath = file.getAbsolutePath() + ".csv";//returns selected file pathway as string to be used in creating csv
+   		 }
+   		 try
+   		 {
+   			 CreateCSVFile file = new CreateCSVFile(data, filePath);
+   		 }
+   		 catch(Exception exc)
+   		 {
+   			 System.out.println("Error creating CSVFile...");
+   		 }
+   		 JOptionPane.showMessageDialog(null,  "CSV File Created. Program Will Now End.");
+   		 System.exit(0);
+   	 }
     }
     @SuppressWarnings("serial")
     public class FlowLayoutJFrame extends JFrame
     {
-        public static final int WIDTH = 1500;
-        public static final int HEIGHT = 1000;
-        
-        public FlowLayoutJFrame()
-        {
-            super("Twitter Stream Search Window");
-            setSize(WIDTH, HEIGHT);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setLayout(new FlowLayout());
-        }
-    }
+   	 public static final int WIDTH = 1500;
+   	 public static final int HEIGHT = 1000;
+   	 
+   	 public FlowLayoutJFrame()
+   	 {
+   		 super("Twitter Stream Search Window");
+   		 setSize(WIDTH, HEIGHT);
+   		 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   		 setLayout(new FlowLayout());
+   	 }
+   }
 }
 
 
