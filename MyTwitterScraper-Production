@@ -17,7 +17,8 @@ import twitter4j.conf.ConfigurationBuilder;
 
 public class MyTwitterScraper
 {
-    //initial global vars
+    //global variables
+    
     String filePath = "", OAuthConsumerKey = "", OAuthConsumerSecret = "", OAuthAccessToken = "", OAuthAccessTokenSecret = "";
     String consumerKey = "consumerKey", consumerSecret = "consumerSecret", accessToken = "accessToken", accessTokenSecret = "accessTokenSecret";
     JFileChooser fileChooser = new JFileChooser(filePath);//opens dialog box for selecting save location
@@ -125,7 +126,6 @@ public class MyTwitterScraper
    			 BufferedReader ckReader = new BufferedReader(new FileReader(consumerKey));
    			 OAuthConsumerKey = ckReader.readLine();
    			 ckReader.close();
-   			 System.out.println("OAuthConsumerKey:   " + OAuthConsumerKey); //trace statement
    		 }
    		 catch(Exception ckReadErr)
    		 {
@@ -136,7 +136,6 @@ public class MyTwitterScraper
    			 BufferedReader csReader = new BufferedReader(new FileReader(consumerSecret));
    			 OAuthConsumerSecret = csReader.readLine();
    			 csReader.close();
-   			 System.out.println("OAuthConsumerSecret:   " + OAuthConsumerSecret); //trace statement
    		 }
    		 catch(Exception csReadErr)
    		 {
@@ -147,7 +146,6 @@ public class MyTwitterScraper
    			 BufferedReader atReader = new BufferedReader(new FileReader(accessToken));
    			 OAuthAccessToken = atReader.readLine();
    			 atReader.close();
-   			 System.out.println("OAuthAccessToken:   " + OAuthAccessToken); //trace statement
    		 }
    		 catch(Exception atReadErr)
    		 {
@@ -158,7 +156,6 @@ public class MyTwitterScraper
    			 BufferedReader atsReader = new BufferedReader(new FileReader(accessTokenSecret));
    			 OAuthAccessTokenSecret = atsReader.readLine();
    			 atsReader.close();
-   			 System.out.println("OAuthAccessTokenSecret:   " + OAuthAccessTokenSecret); //trace statement
    		 }
    		 catch(Exception atsReadErr)
    		 {
@@ -168,9 +165,9 @@ public class MyTwitterScraper
    		 ConfigurationBuilder c = new ConfigurationBuilder();
    		 c.setDebugEnabled(true);
    		 c.setOAuthConsumerKey(OAuthConsumerKey);
-      	 c.setOAuthConsumerSecret(OAuthConsumerSecret);
-      	 c.setOAuthAccessToken(OAuthAccessToken);
-      	 c.setOAuthAccessTokenSecret(OAuthAccessTokenSecret);
+      	 	 c.setOAuthConsumerSecret(OAuthConsumerSecret);
+		 c.setOAuthAccessToken(OAuthAccessToken);
+      		 c.setOAuthAccessTokenSecret(OAuthAccessTokenSecret);
    		 TwitterStream twitStream = new TwitterStreamFactory(c.build()).getInstance();
    		 StatusListener statusEar = new StatusListener()
    		 {
