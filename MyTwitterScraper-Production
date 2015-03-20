@@ -1,4 +1,5 @@
 import java.util.*;
+import java.text.*;
 import javax.swing.*;
 import java.io.*;
 import java.awt.Color;
@@ -8,22 +9,23 @@ import au.com.bytecode.opencsv.CSVWriter;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
-// **********************************************************************************************\\
+// ***********************************************************************************************************************************************************************************************************\\
 /*
  *
  * Jason Dixon 1/11/2015
  */
-//***********************************************************************************************\\
+//************************************************************************************************************************************************************************************************************ \\
 
 public class MyTwitterScraper
 {
-    //global variables
-    
+    //initial global vars
     String filePath = "", OAuthConsumerKey = "", OAuthConsumerSecret = "", OAuthAccessToken = "", OAuthAccessTokenSecret = "";
     String consumerKey = "consumerKey", consumerSecret = "consumerSecret", accessToken = "accessToken", accessTokenSecret = "accessTokenSecret";
     JFileChooser fileChooser = new JFileChooser(filePath);//opens dialog box for selecting save location
     public PrintStream standardOut;
-    public static String content, username, profileLocation;//static twitter ouput vars
+    public static String dateString, content, username, profileLocation;//static twitter ouput vars
+    DateFormat df;
+    Date date;
     JTextField searchTerms = new JTextField(20);//search query input field object
     JTextField totalCount = new JTextField(10);//total count output window
     JPanel topPanel = new JPanel();//top container of UI - contains file name input box, search terms input box, and action buttons
@@ -161,13 +163,16 @@ public class MyTwitterScraper
    		 {
    			 System.out.println("Error reading access token secret from file...");
    		 }
+   		 //time stamper
+   		 df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+   		 
    		 //Twitter4J code block:
    		 ConfigurationBuilder c = new ConfigurationBuilder();
    		 c.setDebugEnabled(true);
    		 c.setOAuthConsumerKey(OAuthConsumerKey);
-      	 	 c.setOAuthConsumerSecret(OAuthConsumerSecret);
-		 c.setOAuthAccessToken(OAuthAccessToken);
-      		 c.setOAuthAccessTokenSecret(OAuthAccessTokenSecret);
+      	 c.setOAuthConsumerSecret(OAuthConsumerSecret);
+      	 c.setOAuthAccessToken(OAuthAccessToken);
+      	 c.setOAuthAccessTokenSecret(OAuthAccessTokenSecret);
    		 TwitterStream twitStream = new TwitterStreamFactory(c.build()).getInstance();
    		 StatusListener statusEar = new StatusListener()
    		 {
@@ -190,14 +195,17 @@ public class MyTwitterScraper
    			 @Override
    			 public void onStatus(Status status)
    			 {
+   				 date = new Date();
+   				 dateString = df.format(date).toString();
    				 User user = status.getUser();//gets username
    				 username = status.getUser().getScreenName();
    				 profileLocation = user.getLocation();//location data
    				 content = status.getText();//tweet content
+   				 System.out.println("Time: " + dateString);
    				 System.out.println("By: " + username);//prints username to console/jtextarea
    				 System.out.println("From: " + profileLocation);
    				 System.out.println("Tweet: " + content + "\n");
-   				 String[] rowData = {username, profileLocation, content};
+   				 String[] rowData = {dateString, username, profileLocation, content};
    				 data.add(rowData);
    				 total += 1;//counts total number of captured treats
    				 if(total%100==0)//on multiples of 100 -- or on every 100 tweets...
@@ -356,5 +364,3 @@ public class MyTwitterScraper
    	 }
    }
 }
-
-
