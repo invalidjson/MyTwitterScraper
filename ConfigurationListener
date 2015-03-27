@@ -1,0 +1,67 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import javax.swing.JOptionPane;
+public class ConfigurationListener implements ActionListener
+{
+	String OAuthConsumerKey = "", OAuthConsumerSecret = "", OAuthAccessToken = "", OAuthAccessTokenSecret = "";
+	String consumerKey = "consumerKey", consumerSecret = "consumerSecret", accessToken = "accessToken", accessTokenSecret = "accessTokenSecret";
+	public void actionPerformed(ActionEvent d)
+	{
+		//set/reset strings to null
+		OAuthConsumerKey = "";
+		OAuthConsumerSecret = "";
+		OAuthAccessToken = "";
+		OAuthAccessTokenSecret = "";
+		//get from user
+		OAuthConsumerKey = JOptionPane.showInputDialog("Copy & Paste your OAuthConsumerKey Here:");
+		try
+		{
+			BufferedWriter ckWriter = new BufferedWriter(new FileWriter("consumerKey"));
+			ckWriter.write(OAuthConsumerKey);
+			ckWriter.close();
+		}
+		catch(Exception ckErr)
+		{
+			System.out.println("Error writing consumer key to file. This data was most likely not saved...");
+		}
+		//get from user
+		OAuthConsumerSecret = JOptionPane.showInputDialog("Copy & Paste your OAuthConsumerSecret Here:");
+		try
+		{
+			BufferedWriter csWriter = new BufferedWriter(new FileWriter("consumerSecret"));
+			csWriter.write(OAuthConsumerSecret);
+			csWriter.close();
+		}
+		catch(Exception csErr)
+		{
+			System.out.println("Error writing consumer secret to file. This data was most likely not saved...");
+		}
+		//get from user
+		OAuthAccessToken = JOptionPane.showInputDialog("Copy & Paste your OAuthAccessToken Here:");
+		try
+		{
+			BufferedWriter asWriter = new BufferedWriter(new FileWriter("accessToken"));
+			asWriter.write(OAuthAccessToken);
+			asWriter.close();
+		}
+		catch(Exception asErr)
+		{
+			System.out.println("Error writing access token to file. This data was most likely not saved...");
+		}
+		//get from user
+		OAuthAccessTokenSecret = JOptionPane.showInputDialog("Copy your OAuthAccessTokenSecret Here:");
+		try
+		{
+			BufferedWriter tsWriter = new BufferedWriter(new FileWriter("accessTokenSecret"));
+			tsWriter.write(OAuthAccessTokenSecret);
+			tsWriter.close();
+		}
+		catch(Exception tsErr)
+		{
+			System.out.println("Error writing access token secret to file. This data was most likely not saved...");
+		}
+		JOptionPane.showMessageDialog(null,  "Your OAuth data has been saved.");
+	}
+}
