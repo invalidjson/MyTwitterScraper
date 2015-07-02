@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
-
+/*
+ * Central class to application. Connects to twitter, authenticates user, opens twitter stream, stores data
+ */
 public class SearchListener implements ActionListener
 {
 	String filePath = "", OAuthConsumerKey = "", OAuthConsumerSecret = "", OAuthAccessToken = "", OAuthAccessTokenSecret = "";
@@ -22,44 +24,45 @@ public class SearchListener implements ActionListener
 		System.setErr(MainGui.printStream);//re-assigns error stream to printStream var
 		try
 		{
-			BufferedReader ckReader = new BufferedReader(new FileReader(consumerKey));
-			OAuthConsumerKey = ckReader.readLine();
-			ckReader.close();
+			BufferedReader consumerKeyReader = new BufferedReader(new FileReader(consumerKey));
+			OAuthConsumerKey = consumerKeyReader.readLine();
+			consumerKeyReader.close();
 		}
-		catch(Exception ckReadErr)
+		catch(Exception consumerKeyReadErr)
 		{
 			System.out.println("Error reading consumer key from file...");
 		}
 		try
 		{
-			BufferedReader csReader = new BufferedReader(new FileReader(consumerSecret));
-			OAuthConsumerSecret = csReader.readLine();
-			csReader.close();
+			BufferedReader consumerSecretReader = new BufferedReader(new FileReader(consumerSecret));
+			OAuthConsumerSecret = consumerSecretReader.readLine();
+			consumerSecretReader.close();
 		}
-		catch(Exception csReadErr)
+		catch(Exception consumerSecretReadErr)
 		{
 			System.out.println("Error reading consumer secret from file...");
 		}
 		try
 		{
-			BufferedReader atReader = new BufferedReader(new FileReader(accessToken));
-			OAuthAccessToken = atReader.readLine();
-			atReader.close();
+			BufferedReader accessTokenReader = new BufferedReader(new FileReader(accessToken));
+			OAuthAccessToken = accessTokenReader.readLine();
+			accessTokenReader.close();
 		}
-		catch(Exception atReadErr)
+		catch(Exception accessTokenReadErr)
 		{
 			System.out.println("Error reading access token from file...");
 		}
 		try
 		{
-			BufferedReader atsReader = new BufferedReader(new FileReader(accessTokenSecret));
-			OAuthAccessTokenSecret = atsReader.readLine();
-			atsReader.close();
+			BufferedReader accessTokenSecretReader = new BufferedReader(new FileReader(accessTokenSecret));
+			OAuthAccessTokenSecret = accessTokenSecretReader.readLine();
+			accessTokenSecretReader.close();
 		}
-		catch(Exception atsReadErr)
+		catch(Exception accessTokenSecretReaderErr)
 		{
 			System.out.println("Error reading access token secret from file...");
 		}
+		
 		//Twitter4J code block:
 		ConfigurationBuilder c = new ConfigurationBuilder();
 		c.setDebugEnabled(true);
@@ -87,15 +90,15 @@ public class SearchListener implements ActionListener
 				//nothing here
 			}
 			@Override
-			public void onStatus(Status status)
+			public void onStatus(Status status)// scrape all the twitters!!!
 			{
-				User user = status.getUser();//gets username
-				username = status.getUser().getScreenName();
+				User user = status.getUser();//gets user
+				username = status.getUser().getScreenName();// gets username
 				profileLocation = user.getLocation();//location data
 				content = status.getText();//tweet content
-				dateString = status.getCreatedAt().toString();
+				dateString = status.getCreatedAt().toString();//time of tweet
 				System.out.println("\nTime: " + dateString);
-				System.out.println("By: " + username);//prints username to console/jtextarea
+				System.out.println("By: " + username);
 				System.out.println("From: " + profileLocation);
 				System.out.println("Tweet: " + content + "\n");
 				String[] rowData = {dateString, username, profileLocation, content};
@@ -103,7 +106,7 @@ public class SearchListener implements ActionListener
 				total += 1;//counts total number of captured treats
 				if(total%100==0)//on multiples of 100 -- or on every 100 tweets...
 				{	
-					MainGui.jta.setText("");//resets text to blank screen
+					MainGui.jta.setText("");//resets text to blank screen -- long scrolling screen takes lots of ram, so reset to keep size contained.
 				}
 				MainGui.totalCount.setText(String.valueOf(total));
 			}
