@@ -1,6 +1,10 @@
 import java.awt.FlowLayout;
+
 import javax.swing.JFrame;
 
+/*
+ * GUI container 
+ */
 @SuppressWarnings("serial")
 public class FlowLayoutJFrame extends JFrame
 {
