@@ -1,16 +1,19 @@
-mport java.io.FileWriter;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import au.com.bytecode.opencsv.CSVWriter;
-public class CreateCSVFile
+public class CSVFileCreator
 {
 	List<String[]> localData = new ArrayList<String[]>();
 	String localFileName = "";
-	public CreateCSVFile(List<String[]> list, String fileName)
+	
+	//takes in List<String[]> data from SearchListener class -- this is the aggregate twitter data that was scraped in the session
+	public CSVFileCreator(List<String[]> list, String fileName)
 	{
 		localData = list;
 		localFileName = fileName;
 	}
+	
 	public void makeFile()
 	{
 		try
@@ -18,7 +21,6 @@ public class CreateCSVFile
 			CSVWriter writer = new CSVWriter(new FileWriter(localFileName));
 			writer.writeAll(localData);
 			writer.close();
-			System.out.println("CSVWriter is closed...");//trace
 		}
 		catch(Exception err)
 		{
