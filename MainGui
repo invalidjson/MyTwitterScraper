@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.PrintStream;
 
+/*
+ * initializes all gui elements. Also sets buttons and action listeners. Launches SearchListener from this class.
+ */
 public class MainGui 
 {
 	public static PrintStream standardOut;
@@ -36,8 +39,9 @@ public class MainGui
     {	 
     	EndingListener endingEar = new EndingListener();
 		SearchListener searchEar = new SearchListener();//searchListener constructor
-		ConfigurationListener configurationEar = new ConfigurationListener();
-				
+		ConfigurationManager configurationEar = new ConfigurationManager();
+		
+		
 		jsp.setBounds(0, 0, 1000, 750);//jscrollpane dims
 		jta.setOpaque(true);
 		jta.setBackground(Color.black);
