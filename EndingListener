@@ -3,6 +3,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+/*
+ * Saves data and closes program
+ */
 public class EndingListener implements ActionListener
 {
 	String filePath = "";
@@ -20,14 +23,14 @@ public class EndingListener implements ActionListener
 		}
 		try
 		{
-			CreateCSVFile file = new CreateCSVFile(SearchListener.data, filePath);//create csv writer
+			CSVFileCreator file = new CSVFileCreator(SearchListener.data, filePath);//create csv writer
 			file.makeFile();//write to file
 		}
 		catch(Exception exc)
 		{
 			System.out.println("Error creating CSVFile...");
 		}
-		JOptionPane.showMessageDialog(null,  "CSV File Created. Program Will Now End.");
+		JOptionPane.showMessageDialog(null,  "CSV File Successfully Created. Program Will Now End.");
 		System.exit(0);
 	}		
 }
