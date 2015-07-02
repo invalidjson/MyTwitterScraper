@@ -1,5 +1,9 @@
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+/*
+ * Displays License splash page and calls main gui
+ */
 public class Main 
 {
 	JFrame licensePopup = new JFrame();
