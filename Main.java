@@ -15,4 +15,8 @@ public class Main
 		MainGui mainGui = new MainGui();
 		mainGui.buildGui();
 	}
+	
+	public static void main(String[] args){
+		new Main().run();
+	}
 }
