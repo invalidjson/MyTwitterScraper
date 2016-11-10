@@ -73,23 +73,22 @@ public class SearchListener implements ActionListener
 		TwitterStream twitStream = new TwitterStreamFactory(c.build()).getInstance();
 		StatusListener statusEar = new StatusListener()
 		{
-			@Override
 			public void 
 			onException(Exception arg0)
 			{
 				//nothing here
 			}
-			@Override
+
 			public void onDeletionNotice(StatusDeletionNotice arg0)
 			{
 				//nothing here
 			}
-			@Override
+
 			public void onScrubGeo(long arg0, long arg1)
 			{
 				//nothing here
 			}
-			@Override
+			
 			public void onStatus(Status status)// scrape all the twitters!!!
 			{
 				User user = status.getUser();//gets user
@@ -110,12 +109,12 @@ public class SearchListener implements ActionListener
 				}
 				MainGui.totalCount.setText(String.valueOf(total));
 			}
-			@Override
+			
 			public void onTrackLimitationNotice(int arg0)
 			{
 				//nothing here
 			}
-			@Override
+			
 			public void onStallWarning(StallWarning warning)
 			{
 				//nothing here
