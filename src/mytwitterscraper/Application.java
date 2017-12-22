@@ -1,4 +1,4 @@
-package mytwitterscraper_reorg;
+package mytwitterscraper;
 
 public class Application 
 {
