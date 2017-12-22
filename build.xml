@@ -6,9 +6,13 @@
 
     <target name="compile">
         <mkdir dir="build/classes"/>
-        <javac srcdir="src" destdir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes" includeantruntime="true" />
     </target>
 
+    <target name="test">
+
+    </target>
+        	
     <target name="jar">
         <mkdir dir="build/jar"/>
         <jar destfile="build/jar/MyTwitterScraper.jar" basedir="build/classes">
