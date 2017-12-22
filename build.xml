@@ -1,0 +1,30 @@
+<project>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes" includeantruntime="true" />
+    </target>
+
+    <target name="test">
+
+    </target>
+        	
+    <target name="jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/MyTwitterScraper.jar" basedir="build/classes">
+        	<zipgroupfileset dir="jars" includes="*.jar"/> 
+            <manifest>
+                <attribute name="Main-Class" value="mytwitterscraper.Application"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run">
+        <java jar="build/jar/MyTwitterScraper.jar" fork="true"/>
+    </target>
+
+</project>
