@@ -1,0 +1,25 @@
+<project>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes"/>
+    </target>
+
+    <target name="jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/MyTwitterScraper.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="oata.MyTwitterScraper"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run">
+        <java jar="build/jar/MyTwitterScraper.jar" fork="true"/>
+    </target>
+
+</project>
