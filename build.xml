@@ -12,8 +12,9 @@
     <target name="jar">
         <mkdir dir="build/jar"/>
         <jar destfile="build/jar/MyTwitterScraper.jar" basedir="build/classes">
+        	<zipgroupfileset dir="jars" includes="*.jar"/> 
             <manifest>
-                <attribute name="Main-Class" value="oata.MyTwitterScraper"/>
+                <attribute name="Main-Class" value="mytwitterscraper.Application"/>
             </manifest>
         </jar>
     </target>
