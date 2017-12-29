@@ -102,13 +102,11 @@ public class SearchListener implements ActionListener
 				getGui().getTotalCount().setText(String.valueOf(total));
 			}
 			
-			@Override
 			public void onTrackLimitationNotice(int arg0)
 			{
 				//nothing here
 			}
 			
-			@Override
 			public void onStallWarning(StallWarning warning)
 			{
 				//nothing here
