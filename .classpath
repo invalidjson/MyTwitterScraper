@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Code/legacy-code/code/mytwitterscraper/jars/opencsv-2.3.jar"/>
+	<classpathentry kind="lib" path="C:/Code/legacy-code/code/mytwitterscraper/jars/twitter4j-async-4.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Code/legacy-code/code/mytwitterscraper/jars/twitter4j-core-4.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Code/legacy-code/code/mytwitterscraper/jars/twitter4j-media-support-4.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Code/legacy-code/code/mytwitterscraper/jars/twitter4j-stream-4.0.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

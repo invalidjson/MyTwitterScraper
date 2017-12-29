@@ -19,6 +19,10 @@ public class MyTwitterScraper
 	   	 
 		MainGui mainGui = new MainGui();
 		mainGui.buildGui();
+		
+		mainGui.setStandardOut(System.out);//re-assigns standard output stream and error to text area
+		System.setOut(mainGui.getPrintStream());//re-assigns standard output stream to printStream var
+		System.setErr(mainGui.getPrintStream());//re-assigns error stream to printStream var
 	}
 }
 
